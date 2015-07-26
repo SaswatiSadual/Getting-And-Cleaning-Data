@@ -1,0 +1,34 @@
+#######################################################################################################################
+## Download the Excel spreadsheet on Natural Gas Aquisition Program here:
+##
+## https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx
+##
+## Read rows 18-23 and columns 7-15 into R and assign the result to a variable called:
+##
+## dat 
+##
+## What is the value of:
+##
+## sum(dat$Zip*dat$Ext,na.rm=T) 
+##
+## (original data source: http://catalog.data.gov/dataset/natural-gas-acquisition-program)
+#######################################################################################################################
+
+## Step 1: Set the file URL to a variable:
+fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2FDATA.gov_NGAP.xlsx"
+
+## Step 2: Set the file name to a variable:
+dest.file <- 'NGAP.xlsx'
+
+## Step 3: Download the file using download.file() command
+##         You may have to give mode = 'wb' because the download mode 
+##         needs to be set properly as write-binary (wb) since xlsx is basically a binary file (zip):
+download.file(fileURL, destfile = dest.file, mode = 'wb')
+
+## Step 4: Read the contents specified:
+rowIndex <- 18:23
+colIndex <- 7:15
+dat <- read.xlsx('NGAP.xlsx', sheetIndex = 1, rowIndex = rowIndex, colIndex = colIndex)
+
+## Step 5: Find the required sum:
+sum(dat$Zip*dat$Ext,na.rm=T)
